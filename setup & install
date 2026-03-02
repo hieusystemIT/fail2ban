@@ -1,0 +1,24 @@
+# fail2ban
+Cài đặt và cấu hình Fail2ban
+
+###Install 
+apt update
+apt install fail2ban -y
+
+Tạo file override:
+nano /etc/fail2ban/jail.local
+
+Cấu hình
+[DEFAULT]
+bantime  = 3600        # ban 1 giờ
+findtime = 600         # tính trong 10 phút
+maxretry = 5           # sai 5 lần thì ban
+backend  = systemd
+destemail = admin@yourdomain.com
+sender = fail2ban@yourdomain.com
+mta = sendmail
+
+[sshd]
+enabled = true
+port    = 22   (mở ssh port bao nhiêu thì sửa)
+logpath = %(sshd_log)s
